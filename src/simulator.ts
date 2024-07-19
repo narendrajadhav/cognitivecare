@@ -127,9 +127,9 @@ const checkInputInterval = setInterval(() => {
 }, 200);
 
 
-setTimeout(() => {
+/* setTimeout(() => {
     nluxSimulator?.enableSimulator();
     nluxSimulator?.setPrompt("How an AI assistant can enhance my website's user experience?");
-}, 1000);
+}, 1000); */
 
 export { };

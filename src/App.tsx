@@ -4,8 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "@nlux/themes/nova.css";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { send } from "./send";
-import { user, assistantAvatar } from "./personas";
-import { ReactComponent as Microphone } from './microphone.svg';
+import { user, Assistant as assistant } from "./personas";
+import { ReactComponent as Microphone } from './images/microphone.svg';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -31,6 +31,7 @@ const App = () => {
       window.nluxSimulator.setTranscriptValue(transcript);
       setStartListening(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening]);
 
 
@@ -46,11 +47,7 @@ const App = () => {
     <AiChat
       adapter={adapter}
       personaOptions={{
-        assistant: {
-          name: "EinAssistant",
-          tagline: "Your Genius AI Assistant",
-          avatar: assistantAvatar,
-        },
+        assistant,
         user,
       }}
       conversationOptions={{ layout: "bubbles" }}

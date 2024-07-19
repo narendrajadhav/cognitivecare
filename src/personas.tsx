@@ -1,8 +1,14 @@
 import { UserPersona } from '@nlux/react';
+import AiAssistant from './images/ai-assistant.png';
+import User from './images/user.png';
 
 export const user: UserPersona = {
-    name: 'Alex',
-    avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png'
+    name: 'Guest User',
+    avatar: User
 };
 
-export const assistantAvatar = 'https://docs.nlkit.com/nlux/images/personas/albert.png';
+export const Assistant = {
+    name: "Cognitive Care Assistant",
+    tagline: "I am your AI assistant for cognitive care. What can I do for you today?",
+    avatar: AiAssistant,
+};
