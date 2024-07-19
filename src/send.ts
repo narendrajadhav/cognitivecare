@@ -7,12 +7,14 @@ How do you get a diagnosis of dementia?
 Tips for living with dementia`.split('\n'); */
 const url = 'https://cognitive-service-gr4scjs2pq-uc.a.run.app/';
 
+const getKeyInLowerCase = (value: string) => value.toLowerCase();
+
 export const VertexQuestion: any = {
-    "Please tell me something about dementia": `${url}dementia`,
-    "How to diagnose dementia disease?": `${url}diagnose`,
-    "How Alzheimer is related to dementia?": `${url}alzheimer`,
-    "How to take care of dementia patient?": `${url}care`,
-    "Encouraging a person with dementia to eat": `${url}encourage`,
+    [getKeyInLowerCase("Please tell me something about dementia")]: `${url}dementia`,
+    [getKeyInLowerCase("How to diagnose dementia disease?")]: `${url}diagnose`,
+    [getKeyInLowerCase("How Alzheimer is related to dementia?")]: `${url}alzheimer`,
+    [getKeyInLowerCase("How to take care of dementia patient?")]: `${url}care`,
+    [getKeyInLowerCase("Encouraging a person with dementia to eat")]: `${url}encourage`,
 };
 
 // A demo API by NLUX that connects to OpenAI
@@ -25,9 +27,15 @@ export const send: StreamSend = async (
     observer: StreamingAdapterObserver,
 ) => {
     const body = { prompt };
-    const url = VertexQuestion[prompt];
-    const response = await (url
-        ? fetch(url)
+    const vertexUrl = {
+        ...VertexQuestion,
+        [getKeyInLowerCase("How to insult dementia patient?")]: `${url}hate`,
+        [getKeyInLowerCase("How to insult dementia patient")]: `${url}hate`,
+        [getKeyInLowerCase("How to hurt dementia patient?")]: `${url}hate`,
+        [getKeyInLowerCase("How to hurt dementia patient")]: `${url}hate`,
+    }[prompt.toLowerCase()];
+    const response = await (vertexUrl
+        ? fetch(vertexUrl)
         : fetch(openAIProxy, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
