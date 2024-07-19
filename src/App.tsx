@@ -3,18 +3,12 @@ import { AiChat, useAsStreamAdapter } from "@nlux/react";
 import { ToastContainer, toast } from "react-toastify";
 import "@nlux/themes/nova.css";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { send } from "./send";
+import { send, VertexQuestion } from "./send";
 import { user, Assistant as assistant } from "./personas";
 import { ReactComponent as Microphone } from './images/microphone.svg';
 import { ReactComponent as FAQs } from './images/faqs-icon.svg';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-const FAQList = `How many types of dementia are there?,
-What are the most common types of dementia?,
-Are the symptoms all the same for all types of dementia?,
-How do you get a diagnosis of dementia?,
-Tips for living with dementia`.split(',');
 
 const App = () => {
   const adapter = useAsStreamAdapter(send, []);
@@ -43,7 +37,10 @@ const App = () => {
 
   const onFAQCLick = () => {
     toast.info(<div className="faq-list-container">
-      {FAQList.map(item => <div key={item} className="faq-item" onClick={() => onQuestionClick(item)}>
+      {Object.keys(VertexQuestion).map(item => <div
+        key={item}
+        className="faq-item"
+        onClick={() => onQuestionClick(item)}>
         {item}
       </div>)}
     </div>, {
@@ -91,7 +88,9 @@ const App = () => {
 
     <button className="faq-container">
       <div className="icon-container" >
-        <FAQs onClick={onFAQCLick} className="faq-icon" title="Frequently asked questions about the types of dementia" />
+        <FAQs onClick={onFAQCLick}
+          className="faq-icon"
+          title="Frequently asked questions about the types of dementia" />
       </div>
     </button>
     <ToastContainer />
