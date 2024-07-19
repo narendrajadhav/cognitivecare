@@ -6,8 +6,15 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { send } from "./send";
 import { user, Assistant as assistant } from "./personas";
 import { ReactComponent as Microphone } from './images/microphone.svg';
+import { ReactComponent as FAQs } from './images/faqs-icon.svg';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+
+const FAQList = `How many types of dementia are there?,
+What are the most common types of dementia?,
+Are the symptoms all the same for all types of dementia?,
+How do you get a diagnosis of dementia?,
+Tips for living with dementia`.split(',');
 
 const App = () => {
   const adapter = useAsStreamAdapter(send, []);
@@ -34,6 +41,23 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listening]);
 
+  const onFAQCLick = () => {
+    toast.info(<div className="faq-list-container">
+      {FAQList.map(item => <div key={item} className="faq-item" onClick={() => onQuestionClick(item)}>
+        {item}
+      </div>)}
+    </div>, {
+      position: 'bottom-left',
+      autoClose: false,
+      icon: false,
+      toastId: 'faq-list'
+    });
+  };
+
+  const onQuestionClick = (value: string) => {
+    window.nluxSimulator.setTranscriptValue(value);
+    toast.dismiss('faq-list');
+  };
 
   useEffect(() => {
     if (!browserSupportsSpeechRecognition) {
@@ -62,6 +86,12 @@ const App = () => {
           onClick={onMircoPhoneClick}
           className={startListening ? 'microphone-on' : 'microphone-off'}
         />
+      </div>
+    </button>
+
+    <button className="faq-container">
+      <div className="icon-container" >
+        <FAQs onClick={onFAQCLick} className="faq-icon" title="Frequently asked questions about the types of dementia" />
       </div>
     </button>
     <ToastContainer />

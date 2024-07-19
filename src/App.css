@@ -1,10 +1,16 @@
-.btn-container {
+.btn-container,
+.faq-container {
   position: absolute;
   bottom: 0;
   height: 60px;
   right: 50px;
   border: 0;
   background: transparent;
+}
+
+.faq-container {
+  right: auto;
+  left: 10px;
 }
 
 .icon-container {
@@ -20,6 +26,10 @@
   cursor: pointer;
 }
 
+.faq-icon {
+  fill: #00b0b9;
+}
+
 .microphone-on {
   fill: red;
 }
@@ -30,4 +40,24 @@
 
 .nlux-composer-container .nlux-comp-composer {
   gap: 20px;
+  margin-left: 35px;
+}
+
+.nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout.nlux-comp-chatItem--sent>.nlux-comp-message {
+  background-color: #00b0b9;
+}
+
+.nlux-comp-chatItem.nlux-comp-chatItem--sent>.nlux-comp-chatItem-participantInfo>.nlux-comp-avatar>.nlux-comp-avatarContainer>.nlux-comp-avatarPicture {
+  background-color: transparent;
+}
+
+.faq-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-bottom: 1px solid #00b0b9;
+  padding: 10px 0;
+  cursor: pointer;
 }
